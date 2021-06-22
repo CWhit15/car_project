@@ -1,0 +1,1 @@
+Basic full stack application with PostgreSQL database, nodejs API, and vuejs front end
