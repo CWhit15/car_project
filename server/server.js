@@ -22,10 +22,10 @@ app.get('/', (request, response) => {
 
 
 app.get('/vehicles', db.getVehicles)
-app.get('/vehicles/:id', db.getVehicleByID)
-app.post('/vehicles', db.createVehicle)
-app.put('/vehicles/:id', db.updateVehicle)
-app.delete('/vehicles/:id', db.deleteVehicle)
+app.get('/api/vehicles/:id', db.getVehicleByID)
+app.post('/api/vehicles', db.createVehicle)
+app.put('/api/vehicles/:id', db.updateVehicle)
+app.delete('/api/vehicles/:id', db.deleteVehicle)
 
 
 
