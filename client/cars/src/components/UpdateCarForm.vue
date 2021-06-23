@@ -3,10 +3,12 @@
         <div v-if="showModalUpdateCar" class="modal-content">
             <div class="modal-header">
                 <slot name="header"></slot>
+                
             </div>
-            <hr>
+
             <div class="modal-body">
                 <slot name="body"></slot>
+                <p>test paragraph for text within modal vue app</p>
             </div>
             <hr>
             <div>

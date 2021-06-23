@@ -45,6 +45,7 @@ const createVehicle = (request, response) => {
 	const { vin, make, model, color, year } = request.body
 
 	console.log(request.url)
+	console.log(request.body)
 
 	pool.query('INSERT INTO vehicles (vin, make, model, color, year) VALUES ($1, $2, $3, $4, $5)', [vin, make, model, color, year], (error, results) => {
 		if (error) {
@@ -61,7 +62,7 @@ const updateVehicle = (request, response) => {
 	const { vin, make, model, color, year } = request.body
 
 	console.log(request.url)
-
+	console.log(request.body)
 
 	pool.query(
 		'UPDATE vehicles SET vin=$1, make=$2, model=$3, color=$4, year=$5 WHERE id=$6',
@@ -81,6 +82,7 @@ const deleteVehicle = (request, response) => {
 	const id = parseInt(request.params.id)
 
 	console.log(request.url)
+	console.log(request.body)
 
 	pool.query('DELETE FROM vehicles WHERE id= $1', [id], (error, results) => {
 		if (error) {

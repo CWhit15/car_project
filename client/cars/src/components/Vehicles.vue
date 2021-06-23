@@ -6,19 +6,19 @@
         <button v-on:click="AddNewCar" v-if="!showModalNewCar" class="btn btn-success btn-sm ">Add New</button>
         <NewCarForm v-if="showModalNewCar" :showModalNewCar=showModalNewCar v-on:clicked="onChildClick">
             <div slot="header">
-                <h3>Test modal</h3>
+                <h3>Add New Car</h3>
             </div>
             <div slot="body">
-                <p>test paragraph for the modal</p>
+
             </div>
         </NewCarForm>
 
         <UpdateCarForm v-if="showModalUpdateCar" :showModalUpdateCar=showModalUpdateCar v-on:clicked="onChildUpdateClick">
             <div slot="header">
-                <h3>Test update modal</h3>
+                <h3>Update Car</h3>
             </div>
             <div slot="body">
-                <p>test paragraph for the modal</p>
+
             </div>
         </UpdateCarForm>
 
@@ -60,7 +60,7 @@
 
 <script>
 
-    import getAllVehicles from '../services/EventService.js';
+    import {getAllVehicles} from '../services/EventService.js';
     import NewCarForm from './NewCarForm.vue'
     import UpdateCarForm from './UpdateCarForm.vue'
 
@@ -80,7 +80,7 @@
         created() {
             getAllVehicles()
             .then(res => {
-                console.log(res.data)
+                
                 this.vehicles = res.data
                 
             })
@@ -88,7 +88,6 @@
         },
         methods: {
             AddNewCar() {
-                console.log('test')
                 this.showModalNewCar = true;
                 
             },
@@ -102,18 +101,23 @@
             },
             onChildClick () {
                 this.showModalNewCar = false;
+                this.reset()
             },
             onChildUpdateClick () {
                 this.showModalUpdateCar = false;
-            }
+                this.reset()
+            },
+            reset() {
+                getAllVehicles()
+                .then(res => {
+                    this.vehicles = res.data
+                })
+                this.$forceUpdate();
+            },
+            
         }
 
     }
-
-
-
-
-
 
 </script>
 
