@@ -75,6 +75,24 @@ async function getVehicleByID(CarID) {
 
 async function updateVehicle(CarID, vin, make, model, color, year) {
     console.log(CarID + ' ' + vin + ' ' + make + ' ' + model + ' ' + color + ' '+ year)
+
+    let putURL = 'http://localhost:3000/api/vehicles/' + CarID
+    //console.log(putURL)
+
+    let res = await axios
+        .put(putURL, {
+            vin: vin,
+            make: make,
+            model: model,
+            color: color,
+            year: year
+        })
+        .catch(error => {
+            console.error(error)
+        })
+
+        console.log(res)
+        console.log(res.statusText)
 }
 
 
