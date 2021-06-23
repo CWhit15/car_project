@@ -82,7 +82,7 @@ const deleteVehicle = (request, response) => {
 	const id = parseInt(request.params.id)
 
 	console.log(request.url)
-	console.log(request.body)
+	console.log(request.params)
 
 	pool.query('DELETE FROM vehicles WHERE id= $1', [id], (error, results) => {
 		if (error) {

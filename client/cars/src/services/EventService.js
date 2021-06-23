@@ -35,23 +35,6 @@ async function getAllVehicles() {
 async function addNewVehicle(vin, make, model, color,year) {
     console.log(vin + ' ' + make + ' ' + model + ' ' + color + ' '+ year)
 
-    // let postURL = "http://localhost:3000/api/vehicles?"
-    //     + "vin=" + vin
-    //     + "&make=" + make
-    //     + "&model=" + model
-    //     + "&color=" + color
-    //     + "&year=" + year
-    
-    // console.log(postURL)
-
-    // axios
-    //     .post(postURL)
-    //     .then(res => {
-    //         console.log(res)
-    //     })
-    //     .catch(error => {
-    //         console.error(error)
-    //     })
 
     let res = await axios
         .post('http://localhost:3000/api/vehicles', {
@@ -69,9 +52,17 @@ async function addNewVehicle(vin, make, model, color,year) {
 
 }
 
-// export default getAllVehicles
-// module.exports.addNewVehicle = addNewVehicle;
+async function deleteVehicle(CarID) {
+    console.log('deleting car with ID: ' + CarID)
+
+    let deleteURL = 'http://localhost:3000/api/vehicles/' + CarID
+
+    console.log(deleteURL)
+    axios.delete(deleteURL)
+    
+}
+
 
 export { getAllVehicles as getAllVehicles }
 export { addNewVehicle as addNewVehicle }
-
+export { deleteVehicle as deleteVehicle }

@@ -68,13 +68,16 @@
             },
 
             SaveCar() {
-                console.log(this.NewVIN)
-                console.log(this.NewMake)
-                console.log(this.NewModel)
-                console.log(this.NewColor)
-                console.log(this.NewYear)
                 addNewVehicle(this.NewVIN, this.NewMake,this.NewModel, this.NewColor, this.NewYear)
+                this.FormClear();
             },
+            FormClear() {
+                this.NewVIN = null
+                this.NewMake = null
+                this.NewModel = null
+                this.NewColor = null
+                this.NewYear = null
+            }
         },
     }
 

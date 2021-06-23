@@ -2,7 +2,7 @@
     <div class="container">
         
 
-        <h3>vehicles:</h3>
+        <h3>Vehicles:</h3>
         <button v-on:click="AddNewCar" v-if="!showModalNewCar" class="btn btn-success btn-sm ">Add New</button>
         <NewCarForm v-if="showModalNewCar" :showModalNewCar=showModalNewCar v-on:clicked="onChildClick">
             <div slot="header">
@@ -46,8 +46,8 @@
                     <td>{{ vehicles.year }}</td>
                     <td  v-if="!showModalUpdateCar" >
                         <div class="btn-group btn-group-sm" role="group">
-                            <button v-on:click="testUpdate(vehicles.id)" v-if="!showModalUpdateCar" class="btn btn-light">Update</button>
-                            <button v-on:click="testDelete" class="btn btn-danger">Delete</button>
+                            <button v-on:click="UpdateExistingCar(vehicles.id)" v-if="!showModalUpdateCar" class="btn btn-secondary">Update</button>
+                            <button v-on:click="DeleteCar(vehicles.id)" class="btn btn-danger">Delete</button>
 
                         </div>
                     </td>
@@ -60,7 +60,7 @@
 
 <script>
 
-    import {getAllVehicles} from '../services/EventService.js';
+    import {getAllVehicles, deleteVehicle} from '../services/EventService.js';
     import NewCarForm from './NewCarForm.vue'
     import UpdateCarForm from './UpdateCarForm.vue'
 
@@ -91,13 +91,14 @@
                 this.showModalNewCar = true;
                 
             },
-            testUpdate(param) {
+            UpdateExistingCar(param) {
                 console.log(param)
                 this.showModalUpdateCar = true;
                 
             },
-            testDelete() {
-                console.log('delete')
+            DeleteCar(param) {
+                deleteVehicle(param)
+                this.reset();
             },
             onChildClick () {
                 this.showModalNewCar = false;
