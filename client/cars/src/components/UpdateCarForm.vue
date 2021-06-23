@@ -60,6 +60,7 @@
                 UpdateModel:null,
                 UpdateColor:null,
                 UpdateYear:null,
+
             };
         },
         props: {
@@ -70,14 +71,13 @@
         created() {
             getVehicleByID(this.carIDToPass)
             .then(res => {
-                
-                this.UpdateVIN = res.data[0].vin;
-                this.UpdateMake = res.data[0].make;
-                this.UpdateModel = res.data[0].model;
-                this.UpdateColor = res.data[0].color;
-                this.UpdateYear = res.data[0].year;
-                
+                console.log(res.data[0])
+                this.UpdateCarFormObject = res.data[0]
+                this.UpdateValues(res.data[0])
             })
+            
+            
+            
         },
         methods: {
             closeModal() {
@@ -86,7 +86,7 @@
             UpdateCar() {
                 console.log('update car button clicked')
                 console.log(this.carIDToPass)
-                updateVehicle(this.carIDToPass, this.NewVIN, this.NewMake,this.NewModel, this.NewColor, this.NewYear)
+                updateVehicle(this.carIDToPass, this.UpdateVIN, this.UpdateMake,this.UpdateModel, this.UpdateColor, this.UpdateYear)
                 console.log('test')
             },
             ResetForm() {
@@ -100,6 +100,14 @@
                     this.UpdateYear = res.data[0].year;
                     
                 })
+            },
+            UpdateValues(resData) {
+                console.log(resData.id)
+                this.UpdateVIN = resData.vin
+                this.UpdateMake = resData.make
+                this.UpdateModel = resData.model
+                this.UpdateColor = resData.color
+                this.UpdateYear = resData.year
             }
         },
     }
