@@ -62,7 +62,24 @@ async function deleteVehicle(CarID) {
     
 }
 
+async function getVehicleByID(CarID) {
+    console.log('fetching vehicle with ID: ' + CarID)
+    let getURL = 'http://localhost:3000/api/vehicles/' + CarID
+
+    let res = await axios.get(getURL);
+    // console.log('results from getByID')
+    //console.log(res)
+    return res
+
+}
+
+async function updateVehicle(CarID, vin, make, model, color, year) {
+    console.log(CarID + ' ' + vin + ' ' + make + ' ' + model + ' ' + color + ' '+ year)
+}
+
 
 export { getAllVehicles as getAllVehicles }
 export { addNewVehicle as addNewVehicle }
 export { deleteVehicle as deleteVehicle }
+export { getVehicleByID as getVehicleByID }
+export { updateVehicle as updateVehicle }

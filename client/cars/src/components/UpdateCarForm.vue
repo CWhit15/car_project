@@ -38,6 +38,7 @@
                 </form>
             </div>
             <div>
+                <button v-on:click="ResetForm">Reset</button>
                 <button v-on:click="UpdateCar">Save</button>
                 <button v-on:click="closeModal">Cancel</button>
             </div>
@@ -47,11 +48,13 @@
 
 <script>
 
+    import {getVehicleByID, updateVehicle} from '../services/EventService.js';
+
     export default {
         name: 'UpdateCarForm',
         data() {
             return {
-                UpdateCarForm:null,
+                UpdateCarFormObject:null,
                 UpdateVIN:null,
                 UpdateMake:null,
                 UpdateModel:null,
@@ -60,7 +63,21 @@
             };
         },
         props: {
-            showModalUpdateCar: Boolean
+            showModalUpdateCar: Boolean,
+            carIDToPass: Number
+            
+        },
+        created() {
+            getVehicleByID(this.carIDToPass)
+            .then(res => {
+                
+                this.UpdateVIN = res.data[0].vin;
+                this.UpdateMake = res.data[0].make;
+                this.UpdateModel = res.data[0].model;
+                this.UpdateColor = res.data[0].color;
+                this.UpdateYear = res.data[0].year;
+                
+            })
         },
         methods: {
             closeModal() {
@@ -68,7 +85,21 @@
             },
             UpdateCar() {
                 console.log('update car button clicked')
-                
+                console.log(this.carIDToPass)
+                updateVehicle(this.carIDToPass, this.NewVIN, this.NewMake,this.NewModel, this.NewColor, this.NewYear)
+                console.log('test')
+            },
+            ResetForm() {
+                getVehicleByID(this.carIDToPass)
+                .then(res => {
+                    
+                    this.UpdateVIN = res.data[0].vin;
+                    this.UpdateMake = res.data[0].make;
+                    this.UpdateModel = res.data[0].model;
+                    this.UpdateColor = res.data[0].color;
+                    this.UpdateYear = res.data[0].year;
+                    
+                })
             }
         },
     }

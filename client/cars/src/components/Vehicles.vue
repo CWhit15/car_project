@@ -13,7 +13,7 @@
             </div>
         </NewCarForm>
 
-        <UpdateCarForm v-if="showModalUpdateCar" :showModalUpdateCar=showModalUpdateCar v-on:clicked="onChildUpdateClick">
+        <UpdateCarForm v-if="showModalUpdateCar" :showModalUpdateCar=showModalUpdateCar :carIDToPass=carIDToPass v-on:clicked="onChildUpdateClick">
             <div slot="header">
                 <h3>Update Car</h3>
             </div>
@@ -47,7 +47,7 @@
                     <td  v-if="!showModalUpdateCar" >
                         <div class="btn-group btn-group-sm" role="group">
                             <button v-on:click="UpdateExistingCar(vehicles.id)" v-if="!showModalUpdateCar" class="btn btn-secondary">Update</button>
-                            <button v-on:click="DeleteCar(vehicles.id)" class="btn btn-danger">Delete</button>
+                            <button v-on:click="DeleteCar({id: vehicles.id})" class="btn btn-danger">Delete</button>
 
                         </div>
                     </td>
@@ -74,7 +74,8 @@
             return {
                 vehicles:null,
                 showModalNewCar: false,
-                showModalUpdateCar: false
+                showModalUpdateCar: false,
+                carIDToPass: null,
             };
         },
         created() {
@@ -94,7 +95,7 @@
             UpdateExistingCar(param) {
                 console.log(param)
                 this.showModalUpdateCar = true;
-                
+                this.carIDToPass = param;
             },
             DeleteCar(param) {
                 deleteVehicle(param)
