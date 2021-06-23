@@ -8,11 +8,38 @@
 
             <div class="modal-body">
                 <slot name="body"></slot>
-                <p>test paragraph for text within modal vue app</p>
+                <form id="NewCarInfo">
+                    <table class="table">
+                        <thead></thead>
+                        <tbody>
+                            <tr>
+                                <td scope="col">Update VIN</td>
+                                <td scope="col"><input type="text" v-model="UpdateVIN"></td>
+                            </tr>
+                            <tr>
+                                <td scope="col">Update Make</td>
+                                <td scope="col"><input type="text" v-model="UpdateMake"></td>
+                            </tr>
+                            <tr>
+                                <td scope="col">Update Model</td>
+                                <td scope="col"><input type="text" v-model="UpdateModel"></td>
+                            </tr>
+                            <tr>
+                                <td scope="col">Update Color</td>
+                                <td scope="col"><input type="text" v-model="UpdateColor"></td>
+                            </tr>
+                            <tr>
+                                <td scope="col">Update Year</td>
+                                <td scope="col"><input type="text" v-model="UpdateYear"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </form>
             </div>
-            <hr>
             <div>
-                <button v-on:click="closeModal">Close</button>
+                <button v-on:click="UpdateCar">Save</button>
+                <button v-on:click="closeModal">Cancel</button>
             </div>
         </div>
     </div>
@@ -24,7 +51,12 @@
         name: 'UpdateCarForm',
         data() {
             return {
-                UpdateCarForm:null
+                UpdateCarForm:null,
+                UpdateVIN:null,
+                UpdateMake:null,
+                UpdateModel:null,
+                UpdateColor:null,
+                UpdateYear:null,
             };
         },
         props: {
@@ -33,6 +65,10 @@
         methods: {
             closeModal() {
                 this.$emit('clicked');
+            },
+            UpdateCar() {
+                console.log('update car button clicked')
+                
             }
         },
     }
