@@ -24,6 +24,20 @@ import axios from 'axios'
 //     }
 // }
 
+
+function isValid(a, b, c ,d ,e) {
+
+    if (a.length > 30 || b.length > 30 || c.length > 30 || d.length > 30) {
+        return false
+    }
+
+    if (!Number.isInteger(parseInt(e))) {
+        return false
+    }
+
+    return true
+}
+
 async function getAllVehicles() {
     let res = await axios.get("http://localhost:3000/vehicles/");
 
@@ -35,6 +49,10 @@ async function getAllVehicles() {
 async function addNewVehicle(vin, make, model, color,year) {
     console.log(vin + ' ' + make + ' ' + model + ' ' + color + ' '+ year)
 
+    if (!isValid(vin, make, model, color, year)) {
+        console.log('invalid data')
+        return
+    }
 
     let res = await axios
         .post('http://localhost:3000/api/vehicles', {
@@ -49,7 +67,7 @@ async function addNewVehicle(vin, make, model, color,year) {
         })
 
         console.log(res)
-
+        
 }
 
 async function deleteVehicle(CarID) {
@@ -75,6 +93,11 @@ async function getVehicleByID(CarID) {
 
 async function updateVehicle(CarID, vin, make, model, color, year) {
     console.log(CarID + ' ' + vin + ' ' + make + ' ' + model + ' ' + color + ' '+ year)
+
+    if (!isValid(vin, make, model, color, year)) {
+        console.log('invalid data')
+        return
+    }
 
     let putURL = 'http://localhost:3000/api/vehicles/' + CarID
     //console.log(putURL)

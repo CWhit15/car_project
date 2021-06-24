@@ -47,7 +47,7 @@
                     <td  v-if="!showModalUpdateCar" >
                         <div class="btn-group btn-group-sm" role="group">
                             <button v-on:click="UpdateExistingCar(vehicles.id)" v-if="!showModalUpdateCar" class="btn btn-secondary">Update</button>
-                            <button v-on:click="DeleteCar({id: vehicles.id})" class="btn btn-danger">Delete</button>
+                            <button v-on:click="DeleteCar(vehicles.id)" class="btn btn-danger">Delete</button>
 
                         </div>
                     </td>
