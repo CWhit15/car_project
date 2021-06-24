@@ -1,28 +1,7 @@
 import axios from 'axios'
 
-// export default {
-//     name: 'Vehicles',
-//     data() {
-//         return {
-//             vehicles: null,
-//         };
-//     },
-//     created: function() {
-//         axios
-//             .get('http://localhost:3000/vehicles/')
-//             .then(res => {
-//                 this.vehicles = res.data;
-//             })
-//     }
-// }
-
-// export default {
-//     async getAllVehicles() {
-//         let res = await axios.get("http://localhost:3000/vehicles");
-
-//         return res.data;
-//     }
-// }
+const baseURL = 'http://localhost:3000'
+const baseAPIURL = 'http://localhost:3000/api/vehicles/'
 
 
 function isValid(a, b, c ,d ,e) {
@@ -39,7 +18,9 @@ function isValid(a, b, c ,d ,e) {
 }
 
 async function getAllVehicles() {
-    let res = await axios.get("http://localhost:3000/vehicles/");
+    let getURL = baseURL + '/vehicles/'
+
+    let res = await axios.get(getURL);
 
     //console.log(res);
     //console.log(res.data);
@@ -54,8 +35,9 @@ async function addNewVehicle(vin, make, model, color,year) {
         return
     }
 
+
     let res = await axios
-        .post('http://localhost:3000/api/vehicles', {
+        .post(baseAPIURL, {
             vin: vin,
             make: make,
             model: model,
@@ -73,7 +55,7 @@ async function addNewVehicle(vin, make, model, color,year) {
 async function deleteVehicle(CarID) {
     console.log('deleting car with ID: ' + CarID)
 
-    let deleteURL = 'http://localhost:3000/api/vehicles/' + CarID
+    let deleteURL = baseAPIURL + CarID
 
     console.log(deleteURL)
     axios.delete(deleteURL)
@@ -82,7 +64,7 @@ async function deleteVehicle(CarID) {
 
 async function getVehicleByID(CarID) {
     console.log('fetching vehicle with ID: ' + CarID)
-    let getURL = 'http://localhost:3000/api/vehicles/' + CarID
+    let getURL = baseAPIURL + CarID
 
     let res = await axios.get(getURL);
     // console.log('results from getByID')
@@ -99,7 +81,7 @@ async function updateVehicle(CarID, vin, make, model, color, year) {
         return
     }
 
-    let putURL = 'http://localhost:3000/api/vehicles/' + CarID
+    let putURL = baseAPIURL + CarID
     //console.log(putURL)
 
     let res = await axios
