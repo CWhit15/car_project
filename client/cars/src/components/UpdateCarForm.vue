@@ -88,6 +88,7 @@
                 console.log(this.carIDToPass)
                 updateVehicle(this.carIDToPass, this.UpdateVIN, this.UpdateMake,this.UpdateModel, this.UpdateColor, this.UpdateYear)
                 console.log('test')
+                this.closeModal()
             },
             ResetForm() {
                 getVehicleByID(this.carIDToPass)
